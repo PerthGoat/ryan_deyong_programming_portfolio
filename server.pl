@@ -4,8 +4,16 @@ use v5;
 
 use IO::Socket;
 use IO::Select;
+use Cwd 'abs_path';
+use File::Basename 'dirname';
 
 use feature 'say';
+
+# gets the absolute path for what we are serving files from, if a file is not located at this path do not serve it EVER
+my $absolute_path = dirname(abs_path($0));
+
+# the whitelist for which file extensions to allow sending of
+my @whitelist = ('html','jpg','js');
 
 # the path of the folder that holds the templates
 my $base_folder_path = 'canned/';
@@ -41,18 +49,24 @@ sub send_file {
     my ($filename, $client_socket) = @_;
     
     $filename = substr $filename, 1;
-    
+
+    # gets file extension so we can filter on file type
+    my @extsplits = split /\./, $filename;
+    my $extension = $extsplits[-1];    
+
     # get basic client information
     my $client_address = $client_socket->peerhost();
     my $client_port = $client_socket->peerport();
     
     my $content_string = "";
     
-    if(-e $filename) {
+    # checks 3 things
+    # if the file exists, if it has an extension that is on the whitelist, and if it is in the server directory
+    if((-e $filename) and grep(/$extension/, @whitelist) and grep(/$absolute_path/, abs_path($filename))) {
         say "Client $client_address:$client_port requested $filename, which exists. Sending..";
         $content_string = "HTTP/1.1 200 OK\n";
     } else {
-        say "Client $client_address:$client_port requested file $filename, which does not exist, sending 404 to client..";
+        say "Client $client_address:$client_port requested file $filename, which is not available, sending 404 to client..";
         $content_string = "HTTP/1.1 404 Not Found\nRefresh:0; url=/error_pages/404.html\nConnection: Closed\n";
         $client_socket->send($content_string);
         return;
