@@ -119,7 +119,7 @@ while(1) {
         if($leftovers > 0) {
             for(my $i = $leftovers;$i > 0;$i--) {
                 my @handles = $IO_select->handles;
-                my $handle = $handles[1];
+                my $handle = $handles[$i];
                 my $client_address = $handle->peerhost();
                 my $client_port = $handle->peerport();
                 $IO_select->remove($handle);
