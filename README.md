@@ -4,6 +4,12 @@ This is the source code for my programming portfolio website.
 
 TODO:
 
-* Add proper timeouts for connections via slave array
+### HIGH PRIORITY: ###
 
-* fill out more website HTML
+* fill out WireWorld example
+
+* add download for MIT license to MIT page
+
+### LOW PRIORITY: ###
+
+* Add proper timeouts for connections via slave array
