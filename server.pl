@@ -6,6 +6,7 @@ use IO::Socket;
 use IO::Select;
 use Cwd 'abs_path';
 use File::Basename 'dirname';
+use Time::HiRes 'sleep';
 
 use feature 'say';
 
@@ -103,31 +104,66 @@ my $server = IO::Socket::INET->new(LocalHost => '0.0.0.0',
 
 say "Server waiting for clients on port $server_port..";
 
+# perl IO concurrency
+my $IO_select = new IO::Select->new($server);
+
 while(1) {
-    my $client_socket = $server->accept();
-    my $client_address = $client_socket->peerhost();
-    my $client_port = $client_socket->peerport();
-   
-    say "Incoming connection from $client_address:$client_port";
-   
-    my $data = '';
-    $client_socket->recv($data, 1024); # get the browser request
-    # split it into lines, and extract the file it wants
-    my @requestLines = split "\n", $data;
-    my @request = split " ", $requestLines[0];
-    if(scalar @request == 3 and $request[0] eq 'GET') {
-        my $file = $request[1];
-        
-        if($file eq '/') { # this means the browser is looking for "index.html"
-            send_file '/index.html', $client_socket
-        } else { # otherwise it might be looking for anything
-            send_file $file, $client_socket
+    my ($rh_arr) = IO::Select->select($IO_select, undef, undef, 0); # get set of handles to read
+    
+    # this removes leftover connections that are hanging around that cannot be read from for some reason
+    my @can_read_array = @$rh_arr[0];
+    
+    if(not defined $can_read_array[0]) {
+        my $leftovers = $IO_select->count - 1;
+    
+        if($leftovers > 0) {
+            for(my $i = $leftovers;$i > 0;$i--) {
+                my @handles = $IO_select->handles;
+                my $handle = $handles[1];
+                my $client_address = $handle->peerhost();
+                my $client_port = $handle->peerport();
+                $IO_select->remove($handle);
+                shutdown($handle, 1);
+                close($handle);
+                say "Removing leftover connection $client_address:$client_port";
+            }
         }
-    } else {
-        say "Client $client_address:$client_port gave an invalid request";
     }
-   
-    shutdown($client_socket, 1);
+    
+    foreach my $rh (@$rh_arr) {
+        if($rh == $server) { # if new connection
+            my $client_socket = $server->accept();
+            my $client_address = $client_socket->peerhost();
+            my $client_port = $client_socket->peerport();
+            
+            say "Incoming connection from $client_address:$client_port";
+            
+            $IO_select->add($client_socket);
+        } else { # otherwise, existing connection
+            my $data = '';
+            my $client_address = $rh->peerhost();
+            my $client_port = $rh->peerport();
+            $rh->recv($data, 1024); # get the browser request
+            # split it into lines, and extract the file it wants
+            my @requestLines = split "\n", $data;
+            my @request = split " ", $requestLines[0];
+            if(scalar @request == 3 and $request[0] eq 'GET') {
+                my $file = $request[1];
+                
+                if($file eq '/') { # this means the browser is looking for "index.html"
+                    send_file '/index.html', $rh
+                } else { # otherwise it might be looking for anything
+                    send_file $file, $rh
+                }
+            } else {
+                say "Client $client_address:$client_port gave an invalid request";
+            }
+            $IO_select->remove($rh);
+            shutdown($rh, 1);
+            close($rh);
+        }
+    }
+    sleep 0.1; # sleep for 100ms, really lame 100ms timeout
 }
 
 $server->close();
