@@ -14,7 +14,7 @@ use feature 'say';
 my $absolute_path = dirname(abs_path($0));
 
 # the whitelist for which file extensions to allow sending of
-my @whitelist = ('html','jpg','js');
+my @whitelist = ('html','jpg','js','txt');
 
 # the path of the folder that holds the templates
 my $base_folder_path = 'canned/';
