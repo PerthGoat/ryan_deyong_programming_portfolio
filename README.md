@@ -8,8 +8,6 @@ TODO:
 
 * fill out WireWorld example
 
-* add download for MIT license to MIT page
-
 ### LOW PRIORITY: ###
 
 * Add proper timeouts for connections via slave array
