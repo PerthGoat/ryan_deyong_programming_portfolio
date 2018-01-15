@@ -10,6 +10,9 @@ use Time::HiRes 'sleep';
 
 use feature 'say';
 
+# allows logging to a file from the perl script
+STDOUT->autoflush(1);
+
 # gets the absolute path for what we are serving files from, if a file is not located at this path do not serve it EVER
 my $absolute_path = dirname(abs_path($0));
 
