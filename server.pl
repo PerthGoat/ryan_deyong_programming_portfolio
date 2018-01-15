@@ -55,8 +55,8 @@ sub send_file {
     my ($filename, $client_socket) = @_;
     
     $filename = substr $filename, 1;
-	
-	$filename = $absolute_path . $filename;
+    
+    $filename = $absolute_path . $filename;
 
     # gets file extension so we can filter on file type
     my @extsplits = split /\./, $filename;
