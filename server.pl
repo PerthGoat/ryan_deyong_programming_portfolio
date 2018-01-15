@@ -16,7 +16,7 @@ use feature 'say';
 STDOUT->autoflush(1);
 
 # gets the absolute path for what we are serving files from, if a file is not located at this path do not serve it EVER
-my $absolute_path = dirname(abs_path($0));
+my $absolute_path = dirname(abs_path($0)) . '/';
 
 # the whitelist for which file extensions to allow sending of
 my @whitelist = ('html','jpg','js','txt','css','zip','png');
@@ -35,7 +35,7 @@ sub template_engine {
             return $str;
         }
         say "Page is requiring template $result, loading..";
-        my $path = $base_folder_path . $result;
+        my $path = $absolute_path . $base_folder_path . $result;
         if(-e $path) { # if the file exists
             local $/ = undef; # read entire file
             open my $fh, '<', $path or die "Can't open file!";
@@ -55,6 +55,8 @@ sub send_file {
     my ($filename, $client_socket) = @_;
     
     $filename = substr $filename, 1;
+	
+	$filename = $absolute_path . $filename;
 
     # gets file extension so we can filter on file type
     my @extsplits = split /\./, $filename;
