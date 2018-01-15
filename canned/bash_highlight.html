@@ -4,7 +4,7 @@
 	addHighlightRule("([0-9]+)", '<span style="color:darkorange;">$1</span>'); // add number highlight rules
     addHighlightRule("(\\$\\(.*?\\))", '<span style="color:limegreen;">$1</span>'); // add dollar paran highlight rule
     // add function bolding for syntax highlighting
-    var keywords = ['for', 'do', 'in', 'mkdir', 'cd', 'cp', 'rm', 'done'];
+    var keywords = ['for', 'done', 'in', 'mkdir', 'cd', 'cp', 'rm', 'do'];
     for(var i = 0;i < keywords.length;i++) {
         addHighlightRule("(" + keywords[i] + ")", "<b>$1</b>");
     }
