@@ -11,3 +11,4 @@ TODO:
 ### LOW PRIORITY: ###
 
 * Add proper timeouts for connections via slave array
+* Hexadecimal syntax highlighting

@@ -1,24 +1,4 @@
-<!DOCTYPE html>
-
-<html lang='en'>
-    <head>
-        <style>
-            #code {display:none;}
-            :checked + #code {
-                display: block;
-            }
-			canvas {border:1px solid black;
-					background-color:white;}
-        </style>
-    </head>
-    %%header.html%%
-    <br>
-    This is a software rasterizer. It can transform 3D shapes onto a 2D screen using 4D vectors. This is a cube shifted back and to the right.<br>
-	<canvas id='canvas' width="512px" height="512px"></canvas><br>
-	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/mathjs/1.0.1/math.min.js'></script>
-	<script type='text/javascript' src='js/ex.js'></script>
-    Check the checkbox to show the code. <input type='checkbox'>
-    <div id='code'><pre class='h_code'>var cube = [
+var cube = [
         //front face
         [-1, -1, 1, 1],
         [1, -1, 1, 1],
@@ -155,7 +135,4 @@ ctx.moveTo(cube[2][0], cube[2][1]);
 ctx.lineTo(cube[6][0], cube[6][1]);
 ctx.moveTo(cube[3][0], cube[3][1]);
 ctx.lineTo(cube[7][0], cube[7][1]);
-ctx.stroke();</pre></div>
-    %%footer.html%%
-	%%javascript_highlight.html%%
-</html>
+ctx.stroke();

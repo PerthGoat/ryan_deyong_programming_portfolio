@@ -1,25 +1,4 @@
-<!DOCTYPE html>
-
-<html lang='en'>
-    <head>
-        <style>
-            #code {display:none;}
-            :checked + #code {
-                display: block;
-            }
-			.pixel {width:10px;
-				height:10px;
-				display:inline-block;}
-			#scr {line-height:0px;}
-        </style>
-    </head>
-    %%header.html%%
-    <br>
-    This is wireworld, the cellular automata simulation. Pictured is a free-running clock and a diode.<br>
-	<div id='scr'></div>
-	<script type='text/javascript' src='js/wireworld.js'></script>
-    Check the checkbox to show the code. <input type='checkbox'>
-<div id='code'><pre class='h_code'>var pixels = [[]];
+var pixels = [[]];
 			  
 var SCREEN_WIDTH = 15;
 var SCREEN_HEIGHT = 5;
@@ -65,9 +44,9 @@ function setup()
 			{
 				pixels[y] = [];
 			}
-			pix += ':LTARR:br:GTARR:';
+			pix += '<br>';
 		}
-		pix += ':LTARR:span class="pixel" id=' + i + ':GTARR::LTARR:/span:GTARR:';
+		pix += '<span class="pixel" id=' + i + '></span>';
 		pixels[y][i] = 0;
 	}
 	document.getElementById("scr").innerHTML = pix;
@@ -161,7 +140,4 @@ function step()
 	pixels = newPixels;
 }
 
-setInterval(step, 500);</pre></div>
-    %%footer.html%%
-	%%javascript_highlight.html%%
-</html>
+setInterval(step, 500);

@@ -5,7 +5,40 @@
     <br>
     These are some GNU BASH scripts I wrote, they are mainly for fun.
     <h3>Cool Cowsay!</h3>
+    <div><pre class='h_code'>cowsay -f $(shuf -e $(cowsay -l | tail -n +2) -n 1) $(fortune) | lolcat</pre></div>
     <hr>
     <h3>TTA Converter</h3>
+    <div><pre class='h_code'>#!/bin/bash
+# this script will convert .tta files with matching .cue files into folders full of mp3s
+# usage: ./convert.sh
+
+for file in *.tta
+do
+    # gets the base name of the file
+    filename=$(basename "$file")
+    filename=${filename%.*}
+    # creates a root directory to stick stuff in
+    rdir="$filename.mp3.c"
+    mkdir $rdir
+    cd $rdir
+    # converts the initial tta into flac for easier processing
+    ffmpeg -i "../$filename.tta" "$filename.flac"
+    # copies the cue into the root directory with the flac in preparation for separation
+    cp "../$filename.cue" "$filename.cue"
+    # uses the cue file to split up the flac
+    shnsplit -f "$filename.cue" -t %n-%t -o flac "$filename.flac"
+    # removes the temporary flac file (we don't remove the cue in case we need it later)
+    rm "$filename.flac"
+    # begins converting the separate flac files into mp3s
+    for flac in *.flac
+    do
+        # gets the filename again in this separate instance
+        flacname=$(basename "$flac")
+        flacname=${flacname%.*}
+        ffmpeg -i "$flacname.flac" "$flacname.mp3"
+        rm "$flacname.flac"
+    done
+done</pre></div>
     %%footer.html%%
+    %%bash_highlight.html%%
 </html>

@@ -1,0 +1,14 @@
+<script>	
+	addHighlightRule("(\/\/.*)", '<span style="color:green">$1</span>'); // add rule for single line c-style comment
+    addHighlightRule("(/\\*[^*]*\\*+(?:[^/*][^*]*\\*+)*/)", '<span style="color:green">$1</span>'); // scary public-domain regex for multi-line comments
+    addHighlightRule("(\".*?\")", '<span style="color:grey">$1</span>'); // add rule for string highlight
+    addHighlightRule("(\'.*?\')", '<span style="color:grey">$1</span>'); // single quote string highlight
+    addHighlightRule("([0-9]+)", '<span style="color:darkorange;">$1</span>'); // add number highlight rule
+    // add function bolding for syntax highlighting and HTML tags
+    var keywords = ['function','var','log','while','if','switch','case','for','return','typeof','default','break',
+                    ':LTARR:span:GTARR:',':LTARR:div:GTARR:',':LTARR:html:GTARR:',':LTARR:head:GTARR:',':LTARR:body:GTARR:',':LTARR:b:GTARR:',':LTARR:script:GTARR:',':LTARR:pre:GTARR:',':LTARR:/b:GTARR:'];
+    for(var i = 0;i < keywords.length;i++) {
+        addHighlightRule("(" + keywords[i] + ")", "<b>$1</b>");
+    }
+    highlight_all();
+</script>

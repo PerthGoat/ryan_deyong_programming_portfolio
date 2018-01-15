@@ -1,0 +1,12 @@
+<script>	
+	addHighlightRule("(#.*)", '<span style="color:green">$1</span>'); // add rule for single line bash-style comment
+    addHighlightRule("(\".*?\")", '<span style="color:grey">$1</span>'); // add rule for string highlight
+	addHighlightRule("([0-9]+)", '<span style="color:darkorange;">$1</span>'); // add number highlight rules
+    addHighlightRule("(\\$\\(.*?\\))", '<span style="color:limegreen;">$1</span>'); // add dollar paran highlight rule
+    // add function bolding for syntax highlighting
+    var keywords = ['for', 'do', 'in', 'mkdir', 'cd', 'cp', 'rm', 'done'];
+    for(var i = 0;i < keywords.length;i++) {
+        addHighlightRule("(" + keywords[i] + ")", "<b>$1</b>");
+    }
+    highlight_all();
+</script>

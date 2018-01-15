@@ -1,22 +1,4 @@
-<!DOCTYPE html>
-
-<html lang='en'>
-    <head>
-        <style>
-            #code {display:none;}
-            :checked + #code {
-                display: block;
-            }
-			pre {white-space: pre-wrap;}
-        </style>
-    </head>
-    %%header.html%%
-    <br>
-    This is a chip-8 emulator written in JavaScript. It is capable of emulating the entire Chip-8. Included is a random chip-8 program I found on the Internet.<br>
-	<canvas id='canvas' width='64' height='32' style='border:1px solid black;width:256px;height:128px;image-rendering:pixelated;'></canvas><br>
-	<script type='text/javascript' src='js/chip8.js'></script>
-    Check the checkbox to show the code. <input type='checkbox'>
-    <div id='code'><pre class='h_code'>var canvas = document.getElementById('canvas');
+var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
 var program = "a3 21 60 00 61 00 62 08 d0 15 f2 1e 80 24 d0 15 f2 1e 80 24 d0 15 f2 1e 80 24 d0 15 f2 1e 80 24 d0 15 f2 1e 80 24 d0 15 f2 1e 80 24 d0 15 f2 1e 80 24 d0 15 66 05 67 02 6a 00 12 b8 6b 00 6c 00 a2 d8 fb 1e f3 65 22 ce 22 5c 12 62 22 ce 22 5c 7b 04 7c 01 5c 60 12 40 12 3c 12 00 a3 20 de d1 00 ee a2 d8 fb 1e f3 65 80 24 81 34 8e 00 8d 10 8e e6 8d d6 84 e0 65 c2 84 54 4f 01 12 92 4d 00 63 01 84 d0 65 e1 84 54 4f 01 12 92 33 02 73 01 12 94 22 9c a2 d8 fb 1e f3 55 12 4c a3 00 fa 1e f0 65 82 00 7a 01 64 1f 8a 42 60 20 61 1e 80 0e 81 1e c3 03 73 f8 00 ee 6b 00 6c 00 22 9c a2 d8 fb 1e f3 55 7b 04 7c 01 5c 60 12 bc 12 3c 8e 00 8d 10 8e e6 8d d6 00 ee 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 f8 fa f9 fe fb fc fd ff 02 01 03 05 04 06 07 08 06 07 04 05 03 01 02 fe ff fc fb fd fa f9 f8 fa 80 f7 06 77 06 36 00 00 00 c7 6c cf 0c 0c 00 00 00 9f d9 df d9 d9 00 00 00 3f 8c 0c 8c 8c 00 00 00 67 6c 6c 6c 67 00 00 00 b0 30 30 30 be 00 00 00 f9 c3 f1 c0 fb 00 00 00 ef 00 ce 60 cc 00 00 00";
@@ -262,7 +244,4 @@ function emulateCycle()
 		delay_timer--;
 	}
 }
-setInterval(emulateCycle, 1000 / 60);</pre></div>
-    %%footer.html%%
-	%%javascript_highlight.html%%
-</html>
+setInterval(emulateCycle, 1000 / 60);

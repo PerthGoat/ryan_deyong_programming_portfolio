@@ -4,5 +4,58 @@
     %%header.html%%
     <br>
     These are userscripts that I wrote to help automate some tedious tasks in Google Chrome.
+	<h3>EBay Shipping Calculator</h3>
+	<div><pre class='h_code'>// ==UserScript==
+// @name EBay Shipping Calculator
+// @version 1.0
+// @match https://www.ebay.com/*
+// ==/UserScript==
+
+// calculates ebay's shipping + item price and displays it near the price
+// stops confusion in shipping prices
+
+var prices = document.getElementsByClassName('lvprice prc');
+var shippings = document.getElementsByClassName('lvshipping');
+
+for(var i = 0;i < prices.length;i++) {
+  if(shippings[i] !== undefined) {
+    var shipping = parseFloat(shippings[i].textContent.replace(/^\D+/g, ''));
+    var price = parseFloat(prices[i].getElementsByClassName('bold')[0].textContent.replace(/^\D+/g, ''));
+    if(!isNaN(shipping)) {
+      prices[i].getElementsByClassName('bold')[0].innerHTML += ' ($' + (price + shipping).toFixed(2) + ')';
+      console.log("Price is " + price);
+    }
+  }
+}</pre></div><hr>
+	<h3>Reddit Downvote Post Clear</h3>
+	<div><pre class='h_code'>// ==UserScript==
+// @name Reddit Downvote Post Clear
+// @version 1.0
+// @match https://www.reddit.com/*
+// ==/UserScript==
+
+// Clears all downvoted posts from view
+
+var posts = [].slice.call(document.getElementsByClassName('link'));
+
+for(var i = 0;i < posts.length;i++) {
+  if(posts[i].getElementsByClassName('dislikes').length == 3) {
+    posts[i].parentElement.removeChild(posts[i]);
+  }
+}</pre></div><hr>
+	<h3>Steam Web Interface Autoscroll Fix</h3>
+	<div><pre class='h_code'>// ==UserScript==
+// @name Steam Web Chat Autoscroll
+// @version 1.1
+// @match https://steamcommunity.com/chat
+// ==/UserScript==
+
+//fixes the position of the chat dialog content inner class using some CSS injection
+//this is necessary for the ScrollToBottom method to function properly
+var style = document.createElement('style');
+style.type = 'text/css';
+style.innerHTML = '.chat_dialog_content_inner {position:absolute;};';
+document.getElementsByTagName('head')[0].appendChild(style);</pre></div>
     %%footer.html%%
+	%%javascript_highlight.html%%
 </html>
