@@ -94,7 +94,7 @@ sub send_file {
 }
 
 my $server_host = '0.0.0.0';
-my $server_port = 8080;
+my $server_port = 80;
 
 my $server = IO::Socket::INET->new(LocalHost => $server_host,
                                    LocalPort => $server_port,
