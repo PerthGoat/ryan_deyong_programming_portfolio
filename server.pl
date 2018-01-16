@@ -140,9 +140,9 @@ while(1) {
     foreach my $rh (@$rh_arr) {
         if($rh == $server) { # if new connection
             my $client_socket = $server->accept() || do {
-				# if the server connection fails due to hackers / other problems, immediately fail this iteration
-				next;
-			};
+                # if the server connection fails due to hackers / other problems, immediately fail this iteration
+                next;
+            };
             my $client_address = $client_socket->peerhost();
             my $client_port = $client_socket->peerport();
             
