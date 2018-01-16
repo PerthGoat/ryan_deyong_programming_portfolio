@@ -1,0 +1,28 @@
+Jan 16 13:18:05 dankenmemes server.pl[117]: Incoming connection from 63.141.244.250:61386
+Jan 16 13:18:05 dankenmemes server.pl[117]: Client 63.141.244.250:61386 requested file /root/ryan_deyong_programming_portfolio/blogs/wp-admin/setup-config.ph
+Jan 16 13:18:05 dankenmemes server.pl[117]: Incoming connection from 63.141.244.250:61392
+Jan 16 13:18:06 dankenmemes server.pl[117]: Client 63.141.244.250:61392 requested file /root/ryan_deyong_programming_portfolio/beta/wp-admin/setup-config.php
+Jan 16 13:18:06 dankenmemes server.pl[117]: Incoming connection from 63.141.244.250:61427
+Jan 16 13:18:06 dankenmemes server.pl[117]: Client 63.141.244.250:61427 requested file /root/ryan_deyong_programming_portfolio/wp-admin/setup-config.php, whi
+Jan 16 13:18:06 dankenmemes server.pl[117]: Incoming connection from 63.141.244.250:61452
+Jan 16 13:18:06 dankenmemes server.pl[117]: Client 63.141.244.250:61452 requested file /root/ryan_deyong_programming_portfolio/site/wp-admin/setup-config.php
+Jan 16 13:18:06 dankenmemes server.pl[117]: Incoming connection from 63.141.244.250:61464
+Jan 16 13:18:06 dankenmemes server.pl[117]: Client 63.141.244.250:61464 requested file /root/ryan_deyong_programming_portfolio/cms/wp-admin/setup-config.php,
+Jan 16 13:18:06 dankenmemes server.pl[117]: Incoming connection from 63.141.244.250:61488
+Jan 16 13:18:06 dankenmemes server.pl[117]: Client 63.141.244.250:61488 requested file /root/ryan_deyong_programming_portfolio/blog/wordpress/wp-admin/setup-
+Jan 16 13:47:40 dankenmemes server.pl[117]: Incoming connection from 150.255.10.46:63064
+Jan 16 13:47:40 dankenmemes server.pl[117]: Use of uninitialized value in split at /root/ryan_deyong_programming_portfolio/server.pl line 156.
+Jan 16 13:47:40 dankenmemes server.pl[117]: Client 150.255.10.46:63064 gave an invalid request
+Jan 16 13:47:40 dankenmemes server.pl[117]: Incoming connection from 183.184.24.177:46266
+Jan 16 13:47:40 dankenmemes server.pl[117]: Client 183.184.24.177:46266 requested file /root/ryan_deyong_programming_portfolio/ttp://www.baidu.com/, which is
+Jan 16 13:47:41 dankenmemes server.pl[117]: Incoming connection from 115.198.202.192:14179
+Jan 16 13:47:41 dankenmemes server.pl[117]: Client 115.198.202.192:14179 requested file /root/ryan_deyong_programming_portfolio/ttp://www.123cha.com/, which
+Jan 16 13:47:41 dankenmemes server.pl[117]: Incoming connection from 60.186.104.97:58093
+Jan 16 13:47:42 dankenmemes server.pl[117]: Client 60.186.104.97:58093 requested file /root/ryan_deyong_programming_portfolio/ttp://www.bing.com/, which is n
+Jan 16 13:47:42 dankenmemes server.pl[117]: Use of uninitialized value $client_address in concatenation (.) or string at /root/ryan_deyong_programming_portfo
+Jan 16 13:47:42 dankenmemes server.pl[117]: Use of uninitialized value $client_port in concatenation (.) or string at /root/ryan_deyong_programming_portfolio
+Jan 16 13:47:42 dankenmemes server.pl[117]: Incoming connection from :
+Jan 16 13:47:42 dankenmemes server.pl[117]: Use of uninitialized value $client_address in concatenation (.) or string at /root/ryan_deyong_programming_portfo
+Jan 16 13:47:42 dankenmemes server.pl[117]: Use of uninitialized value $client_port in concatenation (.) or string at /root/ryan_deyong_programming_portfolio
+Jan 16 13:47:42 dankenmemes server.pl[117]: Client : requested file /root/ryan_deyong_programming_portfolio/ttp://www.boxun.com/, which is not available, sen
+Jan 16 13:47:42 dankenmemes server.pl[117]: send: Cannot determine peer address at /root/ryan_deyong_programming_portfolio/server.pl line 79.
